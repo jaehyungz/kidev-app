@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuthStore } from "@/store";
+import { isPwa } from "@/utils";
 import { deleteCookie, getCookie, setCookie } from "cookies-next/client";
 import { useEffect, useState } from "react";
 import { useStore } from "zustand";
@@ -42,6 +43,7 @@ export default function Home() {
         id: {id} pw: {pw}
       </p>
       <p>cookie: {cookieValue}</p>
+      <p>{isPwa() ? "pwa" : "web"}</p>
       <input
         type="text"
         className="border"
