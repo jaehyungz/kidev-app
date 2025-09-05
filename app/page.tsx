@@ -1,7 +1,7 @@
 "use client";
 
+import { useIsPWA } from "@/hooks";
 import { useAuthStore } from "@/store";
-import { isPwa } from "@/utils";
 import { deleteCookie, getCookie, setCookie } from "cookies-next/client";
 import { useEffect, useState } from "react";
 import { useStore } from "zustand";
@@ -15,6 +15,8 @@ export default function Home() {
   const [cookieValue, setCookieValue] = useState("");
 
   const { id, pw, setUser } = useStore(useAuthStore);
+
+  const isPWA = useIsPWA();
 
   const handleSubmit = () => {
     setUser({
@@ -43,7 +45,7 @@ export default function Home() {
         id: {id} pw: {pw}
       </p>
       <p>cookie: {cookieValue}</p>
-      <p>{isPwa() ? "pwa" : "web"}</p>
+      <p>{isPWA === undefined ? "아직모름" : isPWA ? "pwa" : "web"}</p>
       <input
         type="text"
         className="border"
